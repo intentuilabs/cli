@@ -268,7 +268,7 @@ export async function init(flags: {
   const mainPackages = [
     "react-aria-components",
     "tailwindcss-react-aria-components",
-    "intentui-icons",
+    "@intentui/icons",
   ].join(" ")
 
   let devPackages = ["tailwind-variants", "tailwind-merge", "clsx", "tw-animate-css"].join(" ")
