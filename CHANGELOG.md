@@ -1,5 +1,9 @@
 # Changelog
 
+## <small>2.8.2 (2025-04-08)</small>
+
+* fix: fix icon ([8598a45](https://github.com/intentuilabs/cli/commit/8598a45))
+
 ## <small>2.8.1 (2025-04-08)</small>
 
 * fix: migrate ([67a6888](https://github.com/intentuilabs/cli/commit/67a6888))
