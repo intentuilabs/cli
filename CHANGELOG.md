@@ -1,5 +1,10 @@
 # Changelog
 
+## <small>2.8.1 (2025-04-08)</small>
+
+* fix: migrate ([67a6888](https://github.com/intentuilabs/cli/commit/67a6888))
+* wip ([d2bd98f](https://github.com/intentuilabs/cli/commit/d2bd98f))
+
 ## 2.8.0 (2025-03-24)
 
 * feat: remove abality to update index and tsconfig ([56b23ff](https://github.com/intentuilabs/cli/commit/56b23ff))
