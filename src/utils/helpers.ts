@@ -10,7 +10,7 @@ export function hasFolder(folderName: string): boolean {
 }
 
 /**
- *  This function is used to get the CSS path from the justd.json file
+ *  This function is used to get the CSS path from the intentui.json file
  *  or the default CSS path for the project
  *  @returns string
  */
@@ -216,14 +216,14 @@ export function isLaravel(): boolean {
 }
 
 /**
- *  This function is used to get the UI path from the justd.json file
+ *  This function is used to get the UI path from the intentui.json file
  *  @returns string
  */
 export function getUIPathFromConfig() {
-  const configFilePath = path.join(process.cwd(), "justd.json")
+  const configFilePath = path.join(process.cwd(), "intentui.json")
   if (!fs.existsSync(configFilePath)) {
     error(
-      `${warningText("justd.json not found")}. Please run ${highlight("npx justd-cli@latest init")} to initialize the project.`,
+      `${warningText("intentui.json not found")}. Please run ${highlight("npx @intentui/cli@latest init")} to initialize the project.`,
     )
     return
   }
@@ -232,7 +232,7 @@ export function getUIPathFromConfig() {
   return config.ui || `${possibilityComponentsPath()}/ui`
 }
 
-export const justdConfigFile = path.resolve(process.cwd(), "justd.json")
+export const intentuiConfigFile = path.resolve(process.cwd(), "intentui.json")
 
 export const doesProjectExist = (): boolean => {
   const hasPackageJson = fs.existsSync("package.json")

@@ -53,8 +53,8 @@ program
 
 /**
  *  This command is used to add new components to your project
- *  You can also add multiple components at once by separating them with a space (npx justd-cli@latest add aside avatar button)
- *  You can also all by using (npx justd-cli@latest add) then just press `a` and then `enter`
+ *  You can also add multiple components at once by separating them with a space (npx @intentui/cli@latest add aside avatar button)
+ *  You can also all by using (npx @intentui/cli@latest add) then just press `a` and then `enter`
  *  @param components string
  *  @param options any
  */
@@ -80,7 +80,7 @@ program
 
 /**
  *  This command is used to change the current gray
- *  You can see the full theme list here: https://getjustd.com/themes
+ *  You can see the full theme list here: https://intentui.com/themes
  *  @param grayName string
  *  @param options any
  */
@@ -99,11 +99,11 @@ program
   .command("theme")
   .description("Open theme customization page")
   .action(async () => {
-    await open("https://getjustd.com/themes")
+    await open("https://intentui.com/themes")
   })
 
 /**
- *  This command will show differences between local and remote components (justd repo)
+ *  This command will show differences between local and remote components (intentui repo)
  *  @param components string[]
  */
 program

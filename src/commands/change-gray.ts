@@ -1,7 +1,7 @@
 import fs, { writeFileSync } from "node:fs"
 import { getCSSPath } from "@/utils"
 import { configManager } from "@/utils/config"
-import { isTailwind, justdConfigFile, possibilityCssPath } from "@/utils/helpers"
+import { isTailwind, intentuiConfigFile, possibilityCssPath } from "@/utils/helpers"
 import { error, errorText, grayText, highlight } from "@/utils/logging"
 import { getThemesRepoUrl } from "@/utils/repo"
 import { confirm, select } from "@inquirer/prompts"
@@ -45,14 +45,14 @@ export async function setGray(overwriteConfirmation: boolean, selectedTheme?: st
 
   if (!doesConfigExist) {
     error(
-      `${errorText("justd.json not found")}. ${grayText(`Please run ${highlight("npx justd-cli@latest init")} to initialize the project.`)}`,
+      `${errorText("intentui.json not found")}. ${grayText(`Please run ${highlight("npx @intentui/cli@latest init")} to initialize the project.`)}`,
     )
     process.exit(1)
   }
 
   const userConfig = await configManager.loadConfig()
 
-  const config = JSON.parse(fs.readFileSync(justdConfigFile, "utf8"))
+  const config = JSON.parse(fs.readFileSync(intentuiConfigFile, "utf8"))
   let cssPath = config.css || possibilityCssPath()
   if (!overwriteConfirmation) {
     cssPath = await getCSSPath()

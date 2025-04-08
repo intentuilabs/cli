@@ -268,7 +268,7 @@ export async function init(flags: {
   const mainPackages = [
     "react-aria-components",
     "tailwindcss-react-aria-components",
-    "justd-icons",
+    "intentui-icons",
   ].join(" ")
 
   let devPackages = ["tailwind-variants", "tailwind-merge", "clsx", "tw-animate-css"].join(" ")
@@ -283,7 +283,7 @@ export async function init(flags: {
 
   const createdConfig = await configManager.createConfig(config).catch((error) => {
     // @ts-ignore
-    error("Error writing to justd.json:", error?.message)
+    error("Error writing to intentui.json:", error?.message)
     process.exit(1)
   })
 
@@ -302,7 +302,7 @@ export async function init(flags: {
     })
   })
 
-  const fileUrl = getRepoUrlForComponent("primitive", "justd")
+  const fileUrl = getRepoUrlForComponent("primitive", "intentui")
   const response = await fetch(fileUrl)
 
   if (!response.ok) throw new Error(`Failed to fetch component: ${response.statusText}`)
@@ -357,15 +357,15 @@ export async function init(flags: {
     )
   }
 
-  spinner.start(`Configuration saved to ${highlight(`"justd.json"`)}`)
+  spinner.start(`Configuration saved to ${highlight(`"intentui.json"`)}`)
   await new Promise((resolve) => setTimeout(resolve, 500))
-  spinner.succeed(`Configuration saved to ${highlight("justd.json")}`)
+  spinner.succeed(`Configuration saved to ${highlight("intentui.json")}`)
   spinner.succeed("Installation complete.")
 
   console.info("\n\nNot sure what to do next?")
-  console.info(`Visit our documentation at: ${highlight("https://getjustd.com")}`)
+  console.info(`Visit our documentation at: ${highlight("https://intentui.com")}`)
 
   console.info("\nNow try to add some components to your project")
-  console.info(`by running: ${highlight("npx justd-cli@latest add")}`)
+  console.info(`by running: ${highlight("npx @intentui/cli@latest add")}`)
   spinner.stop()
 }

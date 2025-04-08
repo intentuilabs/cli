@@ -6,12 +6,12 @@ import { confirm, input } from "@inquirer/prompts"
 import { transform } from "sucrase"
 import { type Config, configManager } from "./config"
 
-// Get the path to the CSS file from the justd.json file
+// Get the path to the CSS file from the intentui.json file
 export async function getCSSPath() {
   const doesConfigExist = configManager.doesConfigExist()
 
   if (!doesConfigExist) {
-    error("Configuration file justd.json not found. Please run the init command first.")
+    error("Configuration file intentui.json not found. Please run the init command first.")
   }
 
   const config = await configManager.loadConfig()

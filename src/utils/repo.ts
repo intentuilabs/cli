@@ -2,7 +2,7 @@ import { availableGrays } from "@/commands/change-gray"
 import { isTailwind } from "@/utils/helpers"
 import { error } from "@/utils/logging"
 
-const REPO = "https://raw.githubusercontent.com/irsyadadl/justd"
+const REPO = "https://raw.githubusercontent.com/irsyadadl/intentui"
 
 const branchWorkingOn = isTailwind(3) ? "1.x" : "2.x"
 const BRANCH = branchWorkingOn
@@ -35,9 +35,9 @@ export const getThemesRepoUrl = (gray: string): string => {
  *  @param type
  *  @returns string
  */
-export const getRepoUrlForComponent = (componentName: string, type: "justd" | "block") => {
+export const getRepoUrlForComponent = (componentName: string, type: "intentui" | "block") => {
   if (type === "block") {
-    return `https://blocks.getjustd.com/api/registry/ui/${componentName}.tsx`
+    return `https://blocks.intentui.com/api/registry/ui/${componentName}.tsx`
   }
 
   return `${REPO}/${BRANCH}/components/ui/${componentName}.tsx`

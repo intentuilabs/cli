@@ -21,8 +21,8 @@ import chalk from "chalk"
 import { readUser, updateUser } from "rc9"
 import { add } from "./add"
 
-export const FILENAME = ".justd"
-const DOMAIN = "https://blocks.getjustd.com"
+export const FILENAME = ".intentui"
+const DOMAIN = "https://blocks.intentui.com"
 
 class UserCancellationError extends Error {
   constructor(message: string) {

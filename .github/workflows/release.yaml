@@ -16,7 +16,7 @@ jobs:
         uses: oven-sh/setup-bun@v1
         with:
           registry-url: https://registry.npmjs.org/
-          scope: "@irsyadadl"
+          scope: "@intentui"
       - name: Install dependencies
         run: npm install
       - name: Build

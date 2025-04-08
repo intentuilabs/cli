@@ -4,7 +4,7 @@ import * as path from "node:path"
 import { type } from "arktype"
 
 const configType = type({
-  $schema: "string = 'https://getjustd.com/schema.json'",
+  $schema: "string = 'https://intentui.com/schema.json'",
   ui: "string",
   utils: "string",
   gray: "string = 'zinc'",
@@ -82,7 +82,7 @@ export class ConfigManager {
 }
 
 export const configManager = new ConfigManager({
-  filePath: "justd.json",
+  filePath: "intentui.json",
 })
 
 export function getWriteComponentPath(config: Config, componentName: string) {

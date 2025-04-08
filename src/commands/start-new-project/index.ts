@@ -154,10 +154,10 @@ export async function startNewProject(
     }
 
     // const isDev = process.env.NODE_ENV !== "development"
-    // const cliCommand = isDev ? "justd-cli" : "justd-cli@latest"
+    // const cliCommand = isDev ? "intentui-cli" : "@intentui/cli@latest"
 
-    // const cliCommand = "justd-cli"
-    const cliCommand = "justd-cli@latest"
+    // const cliCommand = "intentui-cli"
+    const cliCommand = "@intentui/cli@latest"
     const tsOrJs = language === "typescript" ? "--ts" : "--js"
     const initJustdCommand = ["npx", cliCommand, "init", tsOrJs, "--force", "--yes"]
     // const initJustdCommand = ["bunx", cliCommand, "init", tsOrJs, "--force", "--yes"]
@@ -175,7 +175,7 @@ export async function startNewProject(
     }
 
     console.info("Ready to customize your project?")
-    console.info(`Add new components by running: ${highlight("npx justd-cli@latest add")}`)
+    console.info(`Add new components by running: ${highlight("npx @intentui/cli@latest add")}`)
   } else {
     process.exit(0)
   }
