@@ -1,5 +1,9 @@
 # Changelog
 
+## <small>2.8.5 (2025-04-09)</small>
+
+* fix icons ([af6e505](https://github.com/intentuilabs/cli/commit/af6e505))
+
 ## <small>2.8.4 (2025-04-09)</small>
 
 * fix: naming ([26c1ea2](https://github.com/intentuilabs/cli/commit/26c1ea2))
