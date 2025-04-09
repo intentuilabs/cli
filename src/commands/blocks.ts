@@ -20,6 +20,7 @@ import { listen } from "async-listen"
 import chalk from "chalk"
 import { readUser, updateUser } from "rc9"
 import { add } from "./add"
+import { rename } from "@/commands/rename"
 
 export const FILENAME = ".intentui"
 const DOMAIN = "https://blocks.intentui.com"
@@ -59,6 +60,7 @@ const blockType = type({
 })
 
 export const addBlock = async ({ slugs }: { slugs: string[] }) => {
+  rename()
   if (slugs.length !== 3) {
     console.info(errorText("Please provide three slugs."))
 

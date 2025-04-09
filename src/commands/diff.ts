@@ -8,6 +8,7 @@ import { checkbox } from "@inquirer/prompts"
 import chalk from "chalk"
 import { diffLines } from "diff"
 import ora from "ora"
+import { rename } from "@/commands/rename"
 
 /**
  * This function is used to sanitize the content of a component.
@@ -96,6 +97,7 @@ const compareComponents = (localContent: string, remoteContent: string) => {
  */
 
 export const diff = async (...args: string[]) => {
+  rename()
   try {
     const spinner = ora("Checking.").start()
 

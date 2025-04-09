@@ -49,9 +49,7 @@ export class ConfigManager {
 
   async loadConfig(): Promise<Config> {
     const data = await fs.readFile(this.filePath, "utf-8")
-    const out = this.parseConfig(JSON.parse(data))
-
-    return out
+    return this.parseConfig(JSON.parse(data))
   }
 
   async updateConfig(updates: Partial<Config>): Promise<Config> {

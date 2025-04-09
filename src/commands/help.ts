@@ -1,5 +1,6 @@
 import type { Command } from "commander"
 import packageJson from "../../package.json"
+import { rename } from "@/commands/rename"
 
 /**
  *  This variable is used to store the version of the CLI
@@ -15,6 +16,7 @@ export function help(program: Command) {
     .command("help [command]")
     .description("Show help information")
     .action((commandName) => {
+      rename()
       console.log(`CLI Tool v${version}\n`)
 
       if (commandName) {

@@ -6,6 +6,7 @@ import { error, errorText, grayText, highlight } from "@/utils/logging"
 import { getThemesRepoUrl } from "@/utils/repo"
 import { confirm, select } from "@inquirer/prompts"
 import ora from "ora"
+import { rename } from "@/commands/rename"
 
 export const availableGrays = ["zinc", "gray", "slate", "neutral", "stone"]
 
@@ -13,6 +14,7 @@ export async function changeGray(
   cssLocation: string,
   flags: { yes?: boolean },
 ): Promise<string | undefined> {
+  rename()
   const spinner = ora("Looking up possibilities...").start()
   const grays = availableGrays
   spinner.stop()

@@ -13,6 +13,7 @@ import ora from "ora"
 import { writeCodeFile } from "@/utils"
 import { readUser } from "rc9"
 import { FILENAME } from "./blocks"
+import { rename } from "@/commands/rename"
 
 const exceptions = ["field", "dropdown", "dialog"]
 
@@ -26,6 +27,7 @@ export async function add(options: {
   successMessage: string
   prioritize: "block" | "intentui"
 }) {
+  rename()
   const spinner = ora("Checking.").start()
   const { overwrite, successMessage, components: comps, prioritize = "intentui" } = options
 
