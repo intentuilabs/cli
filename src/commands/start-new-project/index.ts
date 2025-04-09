@@ -159,9 +159,9 @@ export async function startNewProject(
     // const cliCommand = "intentui-cli"
     const cliCommand = "@intentui/cli@latest"
     const tsOrJs = language === "typescript" ? "--ts" : "--js"
-    const initJustdCommand = ["npx", cliCommand, "init", tsOrJs, "--force", "--yes"]
-    // const initJustdCommand = ["bunx", cliCommand, "init", tsOrJs, "--force", "--yes"]
-    await executeCommand(initJustdCommand, "Finishing.")
+    const initIntentUICommand = ["npx", cliCommand, "init", tsOrJs, "--force", "--yes"]
+    // const initIntentUICommand = ["bunx", cliCommand, "init", tsOrJs, "--force", "--yes"]
+    await executeCommand(initIntentUICommand, "Finishing.")
 
     console.info("\nProject setup is now complete.")
     if (framework === "laravel") {

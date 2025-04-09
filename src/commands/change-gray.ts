@@ -38,7 +38,7 @@ export async function changeGray(
 export async function setGray(overwriteConfirmation: boolean, selectedTheme?: string) {
   if (isTailwind(3)) {
     error(
-      `This CLI supports ${highlight("Justd 2.x")}, built with ${highlight("Tailwind v4")}. However, you're currently using ${highlight("Tailwind v3")}.`,
+      `This CLI supports ${highlight("Intent UI 2.x")}, built with ${highlight("Tailwind v4")}. However, you're currently using ${highlight("Tailwind v3")}.`,
     )
     process.exit(1)
   }

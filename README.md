@@ -1,8 +1,8 @@
 # CLI
-The CLI is designed to help you set up your project with [Justd](https://intentui.com) quickly and efficiently. It’s the easiest and most convenient way to install Justd, allowing you to get started with your project in just minutes.
+The CLI is designed to help you set up your project with [Intent UI](https://intentui.com) quickly and efficiently. It’s the easiest and most convenient way to install Intent UI, allowing you to get started with your project in just minutes.
 
 ## Existing Project
-If you already have a project set up—whether it’s built with Laravel, Next.js, Remix, Tanstack, or any other framework—simply run the following command to install Justd:
+If you already have a project set up—whether it’s built with Laravel, Next.js, Remix, Tanstack, or any other framework—simply run the following command to install Intent UI:
 ```bash
 npx @intentui/cli@latest init
 ```
@@ -43,13 +43,13 @@ To get started, run: `cd new-project && npm run dev`
 ```
 
 ## Add
-Once you’ve set up Justd, you can start adding components easily by running the `add` command:
+Once you’ve set up Intent UI, you can start adding components easily by running the `add` command:
 ```bash
 npx @intentui/cli@latest add combo-box
 ```
 
 ## Diff
-If you think your Justd setup might be outdated, don’t worry. You can check for changes by running the `diff` command:
+If you think your Intent UI setup might be outdated, don’t worry. You can check for changes by running the `diff` command:
 ```bash
 npx @intentui/cli@latest diff
 ```
