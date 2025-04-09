@@ -1,6 +1,6 @@
+import { rename } from "@/commands/rename"
 import type { Command } from "commander"
 import packageJson from "../../package.json"
-import { rename } from "@/commands/rename"
 
 /**
  *  This variable is used to store the version of the CLI

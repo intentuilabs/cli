@@ -7,13 +7,7 @@
   "bin": {
     "intentui": "dist/index.js"
   },
-  "files": [
-    "dist",
-    "src/resources",
-    "LICENSE",
-    "README.md",
-    "package.json"
-  ],
+  "files": ["dist", "src/resources", "LICENSE", "README.md", "package.json"],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/intentuilabs/cli.git"
@@ -32,12 +26,7 @@
     "release": "export GITHUB_TOKEN=$(cat .github_token) && release-it",
     "typecheck": "tsc --noEmit"
   },
-  "keywords": [
-    "cli",
-    "intentui cli",
-    "Intent UI",
-    "design-system"
-  ],
+  "keywords": ["cli", "intentui cli", "Intent UI", "design-system"],
   "author": "Irsyad A. Panjaitan",
   "license": "MIT",
   "devDependencies": {

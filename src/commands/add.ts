@@ -10,10 +10,10 @@ import { checkbox } from "@inquirer/prompts"
 import chalk from "chalk"
 import ora from "ora"
 
+import { rename } from "@/commands/rename"
 import { writeCodeFile } from "@/utils"
 import { readUser } from "rc9"
 import { FILENAME } from "./blocks"
-import { rename } from "@/commands/rename"
 
 const exceptions = ["field", "dropdown", "dialog"]
 

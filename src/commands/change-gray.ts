@@ -1,12 +1,12 @@
 import fs, { writeFileSync } from "node:fs"
+import { rename } from "@/commands/rename"
 import { getCSSPath } from "@/utils"
 import { configManager } from "@/utils/config"
-import { isTailwind, intentuiConfigFile, possibilityCssPath } from "@/utils/helpers"
+import { intentuiConfigFile, isTailwind, possibilityCssPath } from "@/utils/helpers"
 import { error, errorText, grayText, highlight } from "@/utils/logging"
 import { getThemesRepoUrl } from "@/utils/repo"
 import { confirm, select } from "@inquirer/prompts"
 import ora from "ora"
-import { rename } from "@/commands/rename"
 
 export const availableGrays = ["zinc", "gray", "slate", "neutral", "stone"]
 

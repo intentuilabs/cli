@@ -1,6 +1,7 @@
 import fs from "node:fs"
 import path from "node:path"
 import { add } from "@/commands/add"
+import { rename } from "@/commands/rename"
 import { type Config, configManager } from "@/utils/config"
 import { grayText, highlight, warningText } from "@/utils/logging"
 import { getRepoUrlForComponent } from "@/utils/repo"
@@ -8,7 +9,6 @@ import { checkbox } from "@inquirer/prompts"
 import chalk from "chalk"
 import { diffLines } from "diff"
 import ora from "ora"
-import { rename } from "@/commands/rename"
 
 /**
  * This function is used to sanitize the content of a component.
