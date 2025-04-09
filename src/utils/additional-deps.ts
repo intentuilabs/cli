@@ -15,7 +15,7 @@ export const additionalDeps = async (
   const dependencies: Record<string, string> = {
     toast: "sonner",
     drawer: "motion",
-    disclosure: "intentui-icons",
+    disclosure: "@intentui/icons",
     tabs: "motion",
     "progress-bar": "motion",
     navbar: "motion",
