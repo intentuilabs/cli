@@ -1,5 +1,9 @@
 # Changelog
 
+## <small>2.8.4 (2025-04-09)</small>
+
+* fix: naming ([26c1ea2](https://github.com/intentuilabs/cli/commit/26c1ea2))
+
 ## <small>2.8.3 (2025-04-09)</small>
 
 * fix: rename `justd.json` to `intentui.json` before hand ([f907a56](https://github.com/intentuilabs/cli/commit/f907a56))
