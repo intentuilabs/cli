@@ -30,6 +30,15 @@ export const getThemesRepoUrl = (gray: string): string => {
 }
 
 /**
+ *  This function is used to get the URL for the primitive.tsx component
+ *  @returns string
+ */
+export const getPrimitiveComponentUrl = () => {
+  if(branchWorkingOn === "1.x") return getRepoUrlForComponent("primitive", "intentui")
+  return `${REPO}/${BRANCH}/lib/primitive.tsx`
+}
+
+/**
  *  This function is used to get the URL for a component
  *  @param componentName string
  *  @param type
