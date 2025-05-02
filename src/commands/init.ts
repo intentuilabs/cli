@@ -25,7 +25,7 @@ import {
   possibilityUtilsPath,
 } from "@/utils/helpers"
 import { error, grayText, highlight, info } from "@/utils/logging"
-import { getRepoUrlForComponent } from "@/utils/repo"
+import { getPrimitiveComponentUrl } from "@/utils/repo"
 import ora from "ora"
 import stripJsonComments from "strip-json-comments"
 
@@ -302,7 +302,7 @@ export async function init(flags: {
     })
   })
 
-  const fileUrl = getRepoUrlForComponent("primitive", "intentui")
+  const fileUrl = getPrimitiveComponentUrl()
   const response = await fetch(fileUrl)
 
   if (!response.ok) throw new Error(`Failed to fetch component: ${response.statusText}`)
