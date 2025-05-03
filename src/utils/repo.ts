@@ -34,7 +34,7 @@ export const getThemesRepoUrl = (gray: string): string => {
  *  @returns string
  */
 export const getPrimitiveComponentUrl = () => {
-  if(branchWorkingOn === "1.x") return getRepoUrlForComponent("primitive", "intentui")
+  if (branchWorkingOn === "1.x") return getRepoUrlForComponent("primitive", "intentui")
   return `${REPO}/${BRANCH}/lib/primitive.tsx`
 }
 
