@@ -5,7 +5,7 @@ import { additionalDeps } from "@/utils/additional-deps"
 import { type Config, configManager, getWriteComponentPath } from "@/utils/config"
 import { getPackageManager } from "@/utils/get-package-manager"
 import { error, grayText, highlight, warn, warningText } from "@/utils/logging"
-import { getRepoUrlForComponent, getUtilsFolder } from "@/utils/repo"
+import { getRepoUrlForComponent, getHooksFolder } from "@/utils/repo"
 import { checkbox } from "@inquirer/prompts"
 import chalk from "chalk"
 import ora from "ora"
@@ -137,7 +137,7 @@ export async function add(options: {
       )
 
       if (!fs.existsSync(mediaQueryFile)) {
-        const responseMediaQuery = await fetch(getUtilsFolder("use-media-query.ts"))
+        const responseMediaQuery = await fetch(getHooksFolder("use-media-query.ts"))
         const fileContentMediaQuery = await responseMediaQuery.text()
 
         await writeCodeFile(config, {

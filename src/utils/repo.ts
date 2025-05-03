@@ -35,7 +35,7 @@ export const getThemesRepoUrl = (gray: string): string => {
  */
 export const getPrimitiveComponentUrl = () => {
   if (branchWorkingOn === "1.x") return getRepoUrlForComponent("primitive", "intentui")
-  return `${REPO}/${BRANCH}/lib/primitive.tsx`
+  return `${REPO}/${BRANCH}/lib/primitive.ts`
 }
 
 /**
@@ -57,8 +57,8 @@ export const getRepoUrlForComponent = (componentName: string, type: "intentui" |
  *  @param file
  *  @returns string
  */
-export const getUtilsFolder = (file: string): string => {
-  const utils = `${REPO}/refs/heads/${BRANCH}/utils/${file}`
+export const getHooksFolder = (file: string): string => {
+  const utils = `${REPO}/refs/heads/${BRANCH}/hooks/${file}`
   if (!utils) {
     throw new Error("REPO_URL environment variable is not set")
   }
