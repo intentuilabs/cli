@@ -1,5 +1,9 @@
 # Changelog
 
+## <small>2.8.7 (2025-05-03)</small>
+
+* fix: fix hooks folder ([4aa168b](https://github.com/intentuilabs/cli/commit/4aa168b))
+
 ## <small>2.8.6 (2025-05-03)</small>
 
 * fix: path on primitive ([3eaedbd](https://github.com/intentuilabs/cli/commit/3eaedbd))
