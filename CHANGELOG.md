@@ -1,5 +1,10 @@
 # Changelog
 
+## <small>2.8.6 (2025-05-03)</small>
+
+* fix: path on primitive ([3eaedbd](https://github.com/intentuilabs/cli/commit/3eaedbd))
+* fix: update component URL fetching logic ([70eea05](https://github.com/intentuilabs/cli/commit/70eea05))
+
 ## <small>2.8.5 (2025-04-09)</small>
 
 * fix icons ([af6e505](https://github.com/intentuilabs/cli/commit/af6e505))
