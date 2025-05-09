@@ -1,6 +1,5 @@
 #! /usr/bin/env bun
 
-// Import necessary modules from the libraries
 import { Command } from "@effect/cli"
 import { BunContext, BunRuntime } from "@effect/platform-bun"
 import { Console, Effect } from "effect"
