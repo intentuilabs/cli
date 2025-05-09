@@ -58,6 +58,7 @@ const rootCommand = Command.make("root", {}, () =>
 
     yield* Console.log("")
     yield* Console.log(chalk.bold.yellow("IntentUI CLI is ready to use!"))
+    yield* Console.log(chalk.cyan("Run 'intentui --help' to see all available commands."))
     yield* Console.log("")
   }),
 )
