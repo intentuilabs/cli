@@ -7,13 +7,7 @@
   "bin": {
     "intentui": "dist/index.js"
   },
-  "files": [
-    "dist",
-    "src/resources",
-    "LICENSE",
-    "README.md",
-    "package.json"
-  ],
+  "files": ["dist", "src/resources", "LICENSE", "README.md", "package.json"],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/intentuilabs/cli.git"
@@ -32,46 +26,29 @@
     "release": "export GITHUB_TOKEN=$(cat .github_token) && release-it",
     "typecheck": "tsc --noEmit"
   },
-  "keywords": [
-    "cli",
-    "intentui cli",
-    "Intent UI",
-    "design-system"
-  ],
+  "keywords": ["cli", "intentui cli", "Intent UI", "design-system"],
   "author": "Irsyad A. Panjaitan",
   "license": "MIT",
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
-    "@changesets/cli": "^2.27.11",
-    "@commitlint/cli": "^19.6.1",
-    "@commitlint/config-conventional": "^19.6.0",
-    "@release-it/conventional-changelog": "^10.0.0",
-    "@types/babel__core": "^7.20.5",
-    "@types/diff": "^7.0.0",
-    "@types/figlet": "^1.7.0",
-    "@types/fs-extra": "^11.0.4",
-    "@types/inquirer": "^9.0.7",
-    "@types/node": "^22.10.7",
+    "@changesets/cli": "^2.29.3",
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "@release-it/conventional-changelog": "^10.0.1",
+    "@types/bun": "latest",
     "husky": "^9.1.7",
-    "release-it": "^18.1.1",
+    "release-it": "^19.0.2",
     "rimraf": "^6.0.1",
-    "typescript": "^5.7.3"
+    "typescript": "^5.8.3"
   },
   "dependencies": {
-    "@antfu/ni": "^23.2.0",
-    "@inquirer/prompts": "^7.2.3",
-    "arktype": "^2.0.0",
-    "async-listen": "^3.0.1",
-    "chalk": "^5.4.1",
-    "commander": "^13.0.0",
-    "diff": "^7.0.0",
-    "nanoid": "^5.0.9",
-    "open": "^10.1.0",
-    "ora": "^8.1.1",
+    "@effect/cli": "^0.60.1",
+    "@effect/platform": "^0.81.1",
+    "@effect/platform-bun": "^0.62.1",
+    "effect": "^3.14.22",
+    "nanoid": "^5.1.5",
     "rc9": "^2.1.2",
-    "strip-json-comments": "^5.0.1",
-    "sucrase": "^3.35.0",
-    "ts-morph": "^25.0.0"
+    "shadcn": "^2.5.0"
   },
   "release-it": {
     "git": {
