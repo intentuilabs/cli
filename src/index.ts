@@ -5,22 +5,67 @@ import { Command } from "@effect/cli"
 import { BunContext, BunRuntime } from "@effect/platform-bun"
 import { Console, Effect } from "effect"
 
+import chalk from "chalk"
+import figlet from "figlet"
+
 import { addCommand } from "~/commands/add.command"
 import { diffCommand } from "~/commands/diff.command"
 import { initCommand } from "~/commands/init.command"
 import { loginCommand } from "~/commands/login.command"
+import { themeCommand } from "./commands/theme.command"
+
+const generateFigletText = (text: string, options: figlet.Options): Effect.Effect<string, Error> =>
+  Effect.async<string, Error>((resume) => {
+    figlet.text(text, options, (error, data) => {
+      if (error) {
+        resume(Effect.fail(new Error(error.message)))
+      } else if (data) {
+        resume(Effect.succeed(data))
+      } else {
+        resume(Effect.fail(new Error("Figlet returned undefined data")))
+      }
+    })
+  })
 
 const rootCommand = Command.make("root", {}, () =>
   Effect.gen(function* () {
-    yield* Console.log("IntentUI CLI is ready to use!")
+    const figletOptions: figlet.Options = {
+      font: "Standard",
+      horizontalLayout: "default",
+    }
+
+    const intentTextEffect = generateFigletText("Intent", figletOptions)
+    const uiTextEffect = generateFigletText("UI", figletOptions)
+
+    const [intentText, uiText] = yield* Effect.all([intentTextEffect, uiTextEffect]).pipe(
+      Effect.catchAll(() => Effect.succeed([chalk.bold.cyan("Intent"), chalk.bold.magenta("UI")])),
+    )
+
+    const intentLines = intentText.split("\n")
+    const uiLines = uiText.split("\n")
+    const maxLength = Math.max(intentLines.length, uiLines.length)
+    const isFigletOutput = intentText.includes("\n")
+
+    for (let i = 0; i < maxLength; i++) {
+      const intentLine = intentLines[i] || ""
+      const uiLine = uiLines[i] || ""
+      if (isFigletOutput) {
+        yield* Console.log(`${chalk.bold.cyan(intentLine.padEnd(20))}${chalk.bold.magenta(uiLine)}`)
+      } else {
+        yield* Console.log(`${intentLine} ${uiLine}`)
+      }
+    }
+
+    yield* Console.log("")
+    yield* Console.log(chalk.bold.yellow("IntentUI CLI is ready to use!"))
+    yield* Console.log("")
   }),
 )
 
 const command = rootCommand.pipe(
-  Command.withSubcommands([initCommand, addCommand, diffCommand, loginCommand]),
+  Command.withSubcommands([initCommand, addCommand, diffCommand, loginCommand, themeCommand]),
 )
 
-// Set up the CLI application
 const cli = Command.run(command, {
   name: "IntentUI Cli",
   version: "v0.0.1",

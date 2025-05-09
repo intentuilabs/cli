@@ -6,7 +6,9 @@ import { Command as RawCommand } from "@effect/platform"
 
 export const componentNames = Args.text({ name: "componentNames" }).pipe(Args.repeated)
 
-export const componentType = Options.choice("type", ["ui", "block"]).pipe(Options.withDefault("ui"))
+export const componentType = Options.choice("type", ["ui", "block", "style"]).pipe(
+  Options.withDefault("ui"),
+)
 
 export const addCommand = Command.make("add", { componentNames, componentType }, (config) =>
   Effect.gen(function* () {

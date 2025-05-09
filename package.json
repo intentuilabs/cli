@@ -36,6 +36,7 @@
     "@commitlint/config-conventional": "^19.8.1",
     "@release-it/conventional-changelog": "^10.0.1",
     "@types/bun": "latest",
+    "@types/figlet": "^1.7.0",
     "husky": "^9.1.7",
     "release-it": "^19.0.2",
     "rimraf": "^6.0.1",
@@ -45,7 +46,9 @@
     "@effect/cli": "^0.60.1",
     "@effect/platform": "^0.81.1",
     "@effect/platform-bun": "^0.62.1",
+    "chalk": "^5.4.1",
     "effect": "^3.14.22",
+    "figlet": "^1.8.1",
     "nanoid": "^5.1.5",
     "rc9": "^2.1.2",
     "shadcn": "^2.5.0"
