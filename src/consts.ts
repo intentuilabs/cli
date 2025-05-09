@@ -1,1 +1,1 @@
-export const REGISTRY_URL = "https://intentui.com";
+export const REGISTRY_URL = "https://intentui.com"
