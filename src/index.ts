@@ -56,7 +56,7 @@ const rootCommand = Command.make("root", {}, () =>
     }
 
     yield* Console.log("")
-    yield* Console.log(chalk.bold.yellow("IntentUI CLI is ready to use!"))
+    yield* Console.log(chalk.bold.yellow("Intent UI CLI is ready to use!"))
     yield* Console.log(chalk.cyan("Run 'intentui --help' to see all available commands."))
     yield* Console.log("")
   }),
@@ -67,8 +67,8 @@ const command = rootCommand.pipe(
 )
 
 const cli = Command.run(command, {
-  name: "IntentUI Cli",
-  version: "v0.0.1",
+  name: "Intent UI CLI",
+  version: "v2.9.0",
 })
 
 cli(process.argv).pipe(Effect.scoped, Effect.provide(BunContext.layer), BunRuntime.runMain)

@@ -78,7 +78,7 @@ const saveApiKey = (apiKey: string) =>
 
 export const loginCommand = Command.make("login", {}, () =>
   Effect.gen(function* () {
-    yield* Console.log("Attempting to log in to IntentUI Blocks...")
+    yield* Console.log("Attempting to log in to Intent UI Blocks...")
 
     const domain = yield* DOMAIN_CONFIG
 
