@@ -1,7 +1,7 @@
 #! /usr/bin/env bun
 
 import { Command } from "@effect/cli"
-import { BunContext, BunRuntime } from "@effect/platform-bun"
+import { NodeContext, NodeRuntime } from "@effect/platform-node"
 import { Console, Effect } from "effect"
 
 import chalk from "chalk"
@@ -71,4 +71,4 @@ const cli = Command.run(command, {
   version: "v2.9.0",
 })
 
-cli(process.argv).pipe(Effect.scoped, Effect.provide(BunContext.layer), BunRuntime.runMain)
+cli(process.argv).pipe(Effect.scoped, Effect.provide(NodeContext.layer), NodeRuntime.runMain)
