@@ -7,6 +7,7 @@ import { Console, Effect } from "effect"
 import chalk from "chalk"
 import figlet from "figlet"
 
+import { FetchHttpClient } from "@effect/platform"
 import { addCommand } from "~/commands/add.command"
 import { diffCommand } from "~/commands/diff.command"
 import { initCommand } from "~/commands/init.command"
@@ -71,4 +72,9 @@ const cli = Command.run(command, {
   version: "v2.9.0",
 })
 
-cli(process.argv).pipe(Effect.scoped, Effect.provide(NodeContext.layer), NodeRuntime.runMain)
+cli(process.argv).pipe(
+  Effect.scoped,
+  Effect.provide(NodeContext.layer),
+  Effect.provide(FetchHttpClient.layer),
+  NodeRuntime.runMain,
+)
