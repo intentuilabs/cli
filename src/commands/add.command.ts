@@ -1,5 +1,5 @@
 import { Args, Command, Options } from "@effect/cli"
-import { Effect, Schema, pipe } from "effect"
+import { Console, Effect, Schema, pipe } from "effect"
 import { REGISTRY_URL } from "~/consts"
 
 import {
@@ -8,6 +8,7 @@ import {
   HttpClientResponse,
   Command as RawCommand,
 } from "@effect/platform"
+import chalk from "chalk"
 import { Component } from "~/schema/component"
 
 export const componentNames = Args.text({ name: "componentNames" }).pipe(Args.repeated)
@@ -38,10 +39,16 @@ export const addCommand = Command.make(
         ),
       )
 
+      if (!allComponents && componentPaths.length === 0) {
+        yield* Console.log(chalk.red("No components selected"))
+        yield* Console.log(chalk.red("Please select a component or use --all"))
+        return
+      }
+
       if (allComponents) {
         const client = yield* HttpClient.HttpClient.pipe()
 
-        const response = yield* HttpClientRequest.get("http://localhost:3000/r/index.json").pipe(
+        const response = yield* HttpClientRequest.get("https://intentui.com/r/index.json").pipe(
           client.execute,
           Effect.flatMap(HttpClientResponse.schemaBodyJson(Schema.Array(Component))),
         )
