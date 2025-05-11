@@ -5,9 +5,10 @@
   "description": "The command line interface for Intent UI.",
   "main": "dist/index.js",
   "bin": {
-    "intentui": "src/index.ts"
+    "intentui": "src/index.ts",
+    "shadcnClone": "dist/shadcn/index.js"
   },
-  "files": ["dist", "src/resources", "LICENSE", "README.md", "package.json"],
+  "files": ["dist", "LICENSE", "README.md", "package.json"],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/intentuilabs/cli.git"
@@ -17,7 +18,7 @@
     "dev": "bun build ./src/index.ts --outdir ./dist --target=node --minify --watch",
     "start": "bun ./src/index.ts",
     "prepare": "npx husky",
-    "build": "bun build ./src/index.ts --outdir ./dist --target=node --minify",
+    "build": "bun build ./src/index.ts --outdir ./dist --target=node --minify && cp -r ./node_modules/shadcn/dist/ ./dist/shadcn",
     "format": "biome lint --fix && biome check --write",
     "test": "bun run build && bun link",
     "preview": "bun run build && bun link",
