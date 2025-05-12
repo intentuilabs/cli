@@ -57,6 +57,7 @@
   "dependencies": {
     "@effect/cli": "^0.60.1",
     "@effect/platform": "^0.81.1",
+    "@effect/platform-bun": "^0.64.0",
     "@effect/platform-node": "^0.78.1",
     "chalk": "^5.4.1",
     "effect": "^3.14.22",
