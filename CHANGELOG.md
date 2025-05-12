@@ -1,5 +1,10 @@
 # Changelog
 
+## <small>2.9.3 (2025-05-12)</small>
+
+* fix: ff ([4860e3f](https://github.com/intentuilabs/cli/commit/4860e3f))
+* Update README.md ([93bbc69](https://github.com/intentuilabs/cli/commit/93bbc69))
+
 ## <small>2.9.2 (2025-05-12)</small>
 
 * fix: fix effect platform ([a28566f](https://github.com/intentuilabs/cli/commit/a28566f))
