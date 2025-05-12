@@ -1,5 +1,11 @@
 # Changelog
 
+## <small>2.9.5 (2025-05-12)</small>
+
+* fix: revert back ([2439029](https://github.com/intentuilabs/cli/commit/2439029))
+* fix: revert back ([6901bb5](https://github.com/intentuilabs/cli/commit/6901bb5))
+* fix: update component URL fetching logic ([70eea05](https://github.com/intentuilabs/cli/commit/70eea05))
+
 ## <small>2.8.5 (2025-04-09)</small>
 
 * fix icons ([af6e505](https://github.com/intentuilabs/cli/commit/af6e505))
