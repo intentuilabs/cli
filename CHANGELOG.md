@@ -1,5 +1,9 @@
 # Changelog
 
+## <small>2.9.6 (2025-05-12)</small>
+
+* fix: some bugs ([b33ced5](https://github.com/intentuilabs/cli/commit/b33ced5))
+
 ## <small>2.9.5 (2025-05-12)</small>
 
 * fix: revert back ([2439029](https://github.com/intentuilabs/cli/commit/2439029))
