@@ -18,9 +18,9 @@ jobs:
           registry-url: https://registry.npmjs.org/
           scope: "@intentui"
       - name: Install dependencies
-        run: npm install
+        run: bun install
       - name: Build
-        run: npm run build
+        run: bun run build
       - run: npm publish --access=public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
