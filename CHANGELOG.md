@@ -1,5 +1,9 @@
 # Changelog
 
+## <small>2.9.1 (2025-05-12)</small>
+
+* fix: bun ([5276ff6](https://github.com/intentuilabs/cli/commit/5276ff6))
+
 ## 2.9.0 (2025-05-12)
 
 * add help ([015187d](https://github.com/intentuilabs/cli/commit/015187d))
