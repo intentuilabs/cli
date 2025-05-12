@@ -6,6 +6,7 @@
   "main": "dist/index.js",
   "bin": {
     "intentuii": "src/index.ts",
+    "@intentui/cli": "dist/index.js",
     "intentui": "dist/index.js",
     "shadcnClone": "dist/shadcn/index.js"
   },
