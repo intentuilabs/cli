@@ -4,7 +4,7 @@ import { Console, Effect } from "effect"
 import { FileSystem, Command as RawCommand } from "@effect/platform"
 import { REGISTRY_URL } from "~/consts"
 
-import { BunCommandExecutor } from "@effect/platform-bun"
+import { NodeCommandExecutor } from "@effect/platform-node"
 
 const shadcnInit = RawCommand.make("shadcnClone", "init", `${REGISTRY_URL}/r/default.json`).pipe(
   RawCommand.stdin("inherit"),
@@ -24,5 +24,5 @@ export const initCommand = Command.make("init", {}, () =>
     }
 
     const results = yield* RawCommand.exitCode(shadcnInit)
-  }).pipe(Effect.scoped, Effect.provide(BunCommandExecutor.layer)),
+  }).pipe(Effect.scoped, Effect.provide(NodeCommandExecutor.layer)),
 ).pipe(Command.withDescription("Initializes the project and sets up necessary configurations."))
