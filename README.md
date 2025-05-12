@@ -56,24 +56,6 @@ npx @intentui/cli@latest diff
 
 This will display the components that differ from your installed versions and provide a list so you can quickly choose which components to update.
 
-## Change Gray
-Not satisfied with the default gray base color? You can easily customize it by running the `change` command:
-```bash
-npx @intentui/cli@latest change-gray
-```
-
-The output will be like this:
-```
-? The specified CSS path 'src/app/globals.css' exists. Do you want to use this path? yes
-? You will override the current theme "`zinc`" with others? yes
-? Pick your desired base gray:
-  zinc
-  gray
-❯ slate
-  neutral
-  stone
-```
-
 ## Alias
 If you’re tired of typing `npx @intentui/cli@latest`, you can create an alias for the CLI by adding the following line to your `.bashrc` or `.zshrc` file:
 ```bash
@@ -83,22 +65,6 @@ Then you can run the CLI using the `intentui` command:
 ```bash
 intentui [command]
 ```
-
-## Options
-The CLI is highly customizable, allowing you to use various flags for a more tailored experience. Here are some of the options available:
-
-### Skip
-If you’re confident with the default values provided by the CLI, you can skip prompts by using the `--yes` or `-y` flag:
-```bash
-npx @intentui/cli@latest init --yes
-```
-
-### Dirty
-When running the `init` command, the CLI checks whether your project is clean. If it’s not, it will throw an error and halt the process. If you want to proceed regardless, you can use the `--force` flag:
-```bash
-npx @intentui/cli@latest init --force
-```
-
 ### Help
 If you’re unsure about the next steps, you can always refer to the `help` command for guidance:
 ```bash
