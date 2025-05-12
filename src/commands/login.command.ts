@@ -7,16 +7,11 @@ import type { ParsedUrlQuery } from "node:querystring"
 import * as url from "node:url"
 import { Command } from "@effect/cli"
 import { Config, Console, Data, Effect } from "effect"
-// BunRuntime might not be needed here if the command doesn't directly use it,
-// as index.ts handles the execution context.
-// import { BunRuntime } from "@effect/platform-bun";
 import { customAlphabet } from "nanoid"
 
-// --- Constants ---
 const FILENAME = ".intentui"
 const DOMAIN_CONFIG = Config.succeed("https://blocks.intentui.com")
 
-// --- Custom Errors ---
 class UserCancellationError extends Data.TaggedError("UserCancellationError")<{
   message: string
 }> {}
@@ -43,7 +38,6 @@ class ServerError extends Data.TaggedError("ServerError")<{
   cause?: unknown
 }> {}
 
-// --- Effects ---
 const nanoid = customAlphabet("123456789QAZWSXEDCRFVTGBYHNUJMIKOLP", 8)
 
 const generateNanoid = Effect.sync(() => nanoid())
