@@ -52,23 +52,42 @@ export function possibilityComponentsPath(): string {
   return "components"
 }
 
-export function possibilityUtilsPath(): string {
+export function possibilityLibPath(): string {
   if (isLaravel()) {
-    return "resources/js/utils"
+    return "resources/js/lib"
   }
   if (hasFolder("src") && !fs.existsSync("artisan") && isNextJs()) {
-    return "src/utils"
+    return "src/lib"
   }
   if (hasFolder("app") && isNextJs() && !fs.existsSync("artisan")) {
-    return "utils"
+    return "lib"
   }
   if (hasFolder("app") && !fs.existsSync("artisan") && isRemix()) {
-    return "app/utils"
+    return "app/lib"
   }
   if (hasFolder("src") && !fs.existsSync("artisan") && !isRemix() && !isNextJs()) {
-    return "src/utils"
+    return "src/lib"
   }
-  return "utils"
+  return "lib"
+}
+
+export function possibilityHookPath(): string {
+  if (isLaravel()) {
+    return "resources/js/hooks"
+  }
+  if (hasFolder("src") && !fs.existsSync("artisan") && isNextJs()) {
+    return "src/hooks"
+  }
+  if (hasFolder("app") && isNextJs() && !fs.existsSync("artisan")) {
+    return "hooks"
+  }
+  if (hasFolder("app") && !fs.existsSync("artisan") && isRemix()) {
+    return "hooks"
+  }
+  if (hasFolder("src") && !fs.existsSync("artisan") && !isRemix() && !isNextJs()) {
+    return "src/hooks"
+  }
+  return "lib"
 }
 
 export function possibilityRootPath(): string {
@@ -178,9 +197,7 @@ export function isTailwind(version: number): boolean {
     const { dependencies = {}, devDependencies = {} } = packageJson
 
     const tailwindVersion = dependencies.tailwindcss || devDependencies.tailwindcss
-
     if (tailwindVersion) {
-      // Remove any non-numeric prefix (e.g., ^ or ~)
       const cleanVersion = tailwindVersion.replace(/^\D*/, "")
       const majorVersion = Number.parseInt(cleanVersion.split(".")[0], 10)
       return majorVersion === version

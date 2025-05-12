@@ -7,13 +7,7 @@
   "bin": {
     "intentui": "dist/index.js"
   },
-  "files": [
-    "dist",
-    "src/resources",
-    "LICENSE",
-    "README.md",
-    "package.json"
-  ],
+  "files": ["dist", "src/resources", "LICENSE", "README.md", "package.json"],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/intentuilabs/cli.git"
@@ -25,19 +19,14 @@
     "prepare": "npx husky",
     "build": "bun build ./src/index.ts --outdir ./dist --target=node --minify",
     "format": "biome lint --fix && biome check --write",
-    "test": "bun run build && bun link",
-    "preview": "bun run clean && bun run build && bun link",
-    "pr": "bun run build && git commit -a",
+    "test": "NODE_ENV=production bun run build && bun link",
+    "preview": "cross-env NODE_ENV=production bun run clean && bun run build && bun link",
+    "pr": "cross-env NODE_ENV=production bun run build && git commit -a",
     "pre": "chmod a+x dist/index.js",
     "release": "export GITHUB_TOKEN=$(cat .github_token) && release-it",
     "typecheck": "tsc --noEmit"
   },
-  "keywords": [
-    "cli",
-    "intentui cli",
-    "Intent UI",
-    "design-system"
-  ],
+  "keywords": ["cli", "intentui cli", "Intent UI", "design-system"],
   "author": "Irsyad A. Panjaitan",
   "license": "MIT",
   "devDependencies": {
@@ -52,6 +41,7 @@
     "@types/fs-extra": "^11.0.4",
     "@types/inquirer": "^9.0.7",
     "@types/node": "^22.10.7",
+    "cross-env": "^7.0.3",
     "husky": "^9.1.7",
     "release-it": "^18.1.1",
     "rimraf": "^6.0.1",

@@ -1,5 +1,5 @@
 import fs from "node:fs"
-import process from "node:process"
+import processer from "node:process"
 import {
   checkIfCommandExists,
   checkIfDirectoryExists,
@@ -17,8 +17,6 @@ import { isTailwind } from "@/utils/helpers"
 import { error, grayText, highlight } from "@/utils/logging"
 import { input, select } from "@inquirer/prompts"
 import { executeCommand } from "./partials/execute-command"
-
-const isProduction = process.env.NODE_ENV === "production"
 
 const frameworks: Record<FrameworkKey, Framework> = {
   laravel: {
@@ -70,7 +68,7 @@ export async function startNewProject(
       error(
         `The directory '${projectName}' already exists. Please choose a different name or remove the existing directory.`,
       )
-      process.exit(1)
+      processer.exit(1)
     }
 
     const options: FrameworkOptions = {}
@@ -120,7 +118,7 @@ export async function startNewProject(
         error(
           `${packageManager} is not installed on your system. Please install ${packageManager} to proceed.`,
         )
-        process.exit(1)
+        processer.exit(1)
       }
     }
 
@@ -133,7 +131,7 @@ export async function startNewProject(
 
     await executeCommand(startCreatingApp, `Creating ${frameworks[framework].name} project.`)
     fs.mkdirSync(projectName, { recursive: true })
-    process.chdir(projectName)
+    processer.chdir(projectName)
     if (framework === "vite") {
       await executeCommand(setupTailwind(packageManager), "Setting up Tailwind CSS.")
       await executeCommand(["npx", "tailwindcss", "init", "-p"], "Initializing Tailwind CSS.")
@@ -153,14 +151,17 @@ export async function startNewProject(
       await setupBiome(packageManager)
     }
 
-    // const isDev = process.env.NODE_ENV !== "development"
-    // const cliCommand = isDev ? "intentui-cli" : "@intentui/cli@latest"
-
-    // const cliCommand = "intentui-cli"
-    const cliCommand = "@intentui/cli@latest"
+    const isDev = process.env.NODE_ENV === "development"
+    const cliCommand = isDev ? "intentui" : "@intentui/cli@latest"
     const tsOrJs = language === "typescript" ? "--ts" : "--js"
-    const initIntentUICommand = ["npx", cliCommand, "init", tsOrJs, "--force", "--yes"]
-    // const initIntentUICommand = ["bunx", cliCommand, "init", tsOrJs, "--force", "--yes"]
+    const initIntentUICommand = [
+      ...(isDev ? [] : ["npx"]),
+      cliCommand,
+      "init",
+      tsOrJs,
+      "--force",
+      "--yes",
+    ]
     await executeCommand(initIntentUICommand, "Finishing.")
 
     console.info("\nProject setup is now complete.")
@@ -177,6 +178,6 @@ export async function startNewProject(
     console.info("Ready to customize your project?")
     console.info(`Add new components by running: ${highlight("npx @intentui/cli@latest add")}`)
   } else {
-    process.exit(0)
+    processer.exit(0)
   }
 }

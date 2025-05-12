@@ -1,6 +1,6 @@
 import fs from "node:fs"
 import path from "node:path"
-import { hasFolder, isLaravel, isNextJs, possibilityCssPath } from "@/utils/helpers"
+import { isNextJs, possibilityCssPath } from "@/utils/helpers"
 import { error } from "@/utils/logging"
 import { confirm, input } from "@inquirer/prompts"
 import { transform } from "sucrase"
@@ -53,17 +53,7 @@ export const writeCodeFile = async (
     parsedContent = parsedContent.replace(/['"]use client['"]\s*\n?/g, "")
   }
 
-  let utils: string
-  if (isLaravel()) {
-    utils = config.utils.replace(/^resources\/js\//, "")
-  } else if (hasFolder("src")) {
-    utils = config.utils.replace(/^src\//, "")
-  } else {
-    utils = config.utils
-  }
-
   const dirPath = path.dirname(options.writePath)
-  parsedContent = parsedContent.replace(/@\/utils\/classes/g, `@/${utils}/classes`)
 
   fs.mkdirSync(dirPath, { recursive: true })
   if (config.language === "javascript") {

@@ -6,7 +6,8 @@ import { type } from "arktype"
 const configType = type({
   $schema: "string = 'https://intentui.com/schema.json'",
   ui: "string",
-  utils: "string",
+  lib: "string",
+  hooks: "string",
   gray: "string = 'zinc'",
   css: "string",
   "alias?": "string",

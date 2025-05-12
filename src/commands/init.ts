@@ -22,7 +22,8 @@ import {
   isTypescriptProject,
   possibilityComponentsPath,
   possibilityCssPath,
-  possibilityUtilsPath,
+  possibilityHookPath,
+  possibilityLibPath,
 } from "@/utils/helpers"
 import { error, grayText, highlight, info } from "@/utils/logging"
 import { getPrimitiveComponentUrl } from "@/utils/repo"
@@ -108,16 +109,18 @@ export async function init(flags: {
   let componentFolder: string
   let twConfigStub: string
   let uiFolder: string
+  let libFolder: string
+  let hookFolder: string
   let cssLocation: string
   let themeProvider: string
   let providers: string
-  let utilsFolder: string
   spinner.succeed("Initializing.")
 
   if (flags.yes) {
     componentFolder = possibilityComponentsPath()
     uiFolder = path.join(componentFolder, "ui")
-    utilsFolder = possibilityUtilsPath()
+    libFolder = possibilityLibPath()
+    hookFolder = possibilityHookPath()
     cssLocation = possibilityCssPath()
   } else {
     componentFolder = await input({
@@ -129,9 +132,16 @@ export async function init(flags: {
 
     uiFolder = path.join(componentFolder, "ui")
 
-    utilsFolder = await input({
-      message: "Utils folder:",
-      default: possibilityUtilsPath(),
+    libFolder = await input({
+      message: "Lib folder:",
+      default: possibilityLibPath(),
+      validate: (value) =>
+        value.trim() !== "" || "Path cannot be empty. Please enter a valid path.",
+    })
+
+    hookFolder = await input({
+      message: "Hooks folder:",
+      default: possibilityHookPath(),
       validate: (value) =>
         value.trim() !== "" || "Path cannot be empty. Please enter a valid path.",
     })
@@ -180,8 +190,12 @@ export async function init(flags: {
     }
   }
 
-  if (!fs.existsSync(utilsFolder)) {
-    fs.mkdirSync(utilsFolder, { recursive: true })
+  if (!fs.existsSync(libFolder)) {
+    fs.mkdirSync(libFolder, { recursive: true })
+  }
+
+  if (!fs.existsSync(hookFolder)) {
+    fs.mkdirSync(hookFolder, { recursive: true })
   }
 
   if (!fs.existsSync(uiFolder)) {
@@ -252,12 +266,14 @@ export async function init(flags: {
     const content = fs.readFileSync(path.join(stubs, "1.x/zinc.css"), "utf8")
     writeFileSync(cssLocation, content, { flag: "w" })
   }
+
   const selectedGray = isTailwind(3) ? "zinc.css" : await changeGray(cssLocation, flags)
 
   const config: ConfigInput = {
     ui: uiFolder,
-    utils: utilsFolder,
-    gray: selectedGray?.replace(".css", "")!,
+    lib: libFolder,
+    hooks: hookFolder,
+    gray: selectedGray?.replace(".css", "") ?? "zinc",
     css: cssLocation,
     alias: currentAlias || undefined,
     language,
@@ -290,12 +306,10 @@ export async function init(flags: {
   const action = packageManager === "npm" ? "i" : "add"
   const installCommand = `${packageManager} ${action} ${mainPackages} && ${packageManager} ${action} -D ${devPackages}  --silent`
   spinner.start("Installing dependencies.")
-
   const child = spawn(installCommand, {
     stdio: ["ignore", "ignore", "ignore"],
     shell: true,
   })
-
   await new Promise<void>((resolve) => {
     child.on("close", () => {
       resolve()
@@ -308,10 +322,9 @@ export async function init(flags: {
   if (!response.ok) throw new Error(`Failed to fetch component: ${response.statusText}`)
 
   const fileContent = await response.text()
-
   await writeCodeFile(createdConfig, {
-    writePath: path.join(uiFolder, "primitive.tsx"),
-    ogFilename: "primitive.tsx",
+    writePath: path.join(libFolder, "primitive.ts"),
+    ogFilename: "primitive.ts",
     content: fileContent,
   })
 
@@ -344,20 +357,20 @@ export async function init(flags: {
   if (!fs.existsSync(uiFolder)) {
     fs.mkdirSync(uiFolder, { recursive: true })
   }
-  spinner.succeed(`UI folder created at ${highlight(`${uiFolder}`)}`)
+  spinner.succeed(`UI folder created at ${highlight(uiFolder)}`)
   spinner.succeed(
-    `Primitive file saved to ${highlight(`${uiFolder}/${getCorrectFileExtension(language, "primitive.tsx")}`)}`,
+    `Primitive file saved to ${highlight(`${libFolder}/${getCorrectFileExtension(language, "primitive.ts")}`)}`,
   )
   if (themeProvider) {
     spinner.succeed(
-      `Theme Provider file saved to ${highlight(`"${componentFolder}/${getCorrectFileExtension(language, "theme-provider.ts")}"`)}`,
+      `Theme Provider file saved to ${highlight(`${componentFolder}/${getCorrectFileExtension(language, "theme-provider.ts")}`)}`,
     )
     spinner.succeed(
-      `Providers file saved to ${highlight(`"${componentFolder}/${getCorrectFileExtension(language, "providers.tsx")}"`)}`,
+      `Providers file saved to ${highlight(`${componentFolder}/${getCorrectFileExtension(language, "providers.tsx")}`)}`,
     )
   }
 
-  spinner.start(`Configuration saved to ${highlight(`"intentui.json"`)}`)
+  spinner.start(`Configuration saved to ${highlight("intentui.json")}`)
   await new Promise((resolve) => setTimeout(resolve, 500))
   spinner.succeed(`Configuration saved to ${highlight("intentui.json")}`)
   spinner.succeed("Installation complete.")
