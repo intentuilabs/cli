@@ -1,5 +1,21 @@
 # Changelog
 
+## 2.9.0 (2025-05-12)
+
+* add help ([015187d](https://github.com/intentuilabs/cli/commit/015187d))
+* ff ([0d5473a](https://github.com/intentuilabs/cli/commit/0d5473a))
+* fix ([0aaf588](https://github.com/intentuilabs/cli/commit/0aaf588))
+* fix ([80a6375](https://github.com/intentuilabs/cli/commit/80a6375))
+* make aliases ([5e94185](https://github.com/intentuilabs/cli/commit/5e94185))
+* update ([8de7e6c](https://github.com/intentuilabs/cli/commit/8de7e6c))
+* feat: add all command ([656320d](https://github.com/intentuilabs/cli/commit/656320d))
+* feat: add cli v2 ([89a7330](https://github.com/intentuilabs/cli/commit/89a7330))
+* feat: add theme command ([978411c](https://github.com/intentuilabs/cli/commit/978411c))
+* feat: fix ([1e96223](https://github.com/intentuilabs/cli/commit/1e96223))
+* feat: not require shadcn cli installed ([a780d67](https://github.com/intentuilabs/cli/commit/a780d67))
+* fix: stuff ([505b2f2](https://github.com/intentuilabs/cli/commit/505b2f2))
+* chore: format ([f60808a](https://github.com/intentuilabs/cli/commit/f60808a))
+
 ## <small>2.8.7 (2025-05-03)</small>
 
 * fix: fix hooks folder ([4aa168b](https://github.com/intentuilabs/cli/commit/4aa168b))
