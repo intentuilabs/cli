@@ -1,5 +1,10 @@
 # Changelog
 
+## <small>2.9.2 (2025-05-12)</small>
+
+* fix: fix effect platform ([a28566f](https://github.com/intentuilabs/cli/commit/a28566f))
+* fix: gh action ([f9c6a4e](https://github.com/intentuilabs/cli/commit/f9c6a4e))
+
 ## <small>2.9.1 (2025-05-12)</small>
 
 * fix: bun ([5276ff6](https://github.com/intentuilabs/cli/commit/5276ff6))
