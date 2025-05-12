@@ -14,10 +14,10 @@ const shadcnInit = RawCommand.make("shadcnClone", "init", `${REGISTRY_URL}/r/def
 
 export const initCommand = Command.make("init", {}, () =>
   Effect.gen(function* () {
-    const fileSytem = yield* FileSystem.FileSystem
+    const fileSyt = yield* FileSystem.FileSystem
 
-    const hasIntentUiConfig = yield* fileSytem.exists("intentui.json")
-    const hasComponentJson = yield* fileSytem.exists("component.json")
+    const hasIntentUiConfig = yield* fileSyt.exists("intentui.json")
+    const hasComponentJson = yield* fileSyt.exists("component.json")
 
     if (hasIntentUiConfig && !hasComponentJson) {
       yield* Console.log("Migrating to new config format...")

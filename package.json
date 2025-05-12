@@ -21,7 +21,7 @@
     "prepare": "npx husky",
     "build": "bun build ./src/index.ts --outdir ./dist --target=node --minify && cp -r ./node_modules/shadcn/dist/ ./dist/shadcn",
     "format": "biome lint --fix && biome check --write",
-    "test": "bun run build && bun link",
+    "test": "bun run build && bun link @intentui/cli && bun run dev",
     "preview": "bun run build && bun link",
     "pr": "bun run build && git commit -a",
     "pre": "chmod a+x dist/index.js",
