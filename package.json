@@ -1,7 +1,7 @@
 {
   "name": "@intentui/cli",
   "type": "module",
-  "version": "2.8.7",
+  "version": "2.9.7",
   "description": "The command line interface for Intent UI.",
   "main": "dist/index.js",
   "bin": {
@@ -23,6 +23,7 @@
     "build": "bun build ./src/index.ts --outdir ./dist --target=node --minify && cp -r ./node_modules/shadcn/dist/ ./dist/shadcn",
     "format": "biome lint --fix && biome check --write",
     "test": "bun run build && bun link",
+    "beta-release": "bun run build && npm publish --tag beta --access=public",
     "preview": "bun run build && bun link",
     "pr": "bun run build && git commit -a",
     "pre": "chmod a+x dist/index.js",
