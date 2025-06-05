@@ -45,6 +45,7 @@ export const diffCommand = Command.make("diff", {}, () =>
   Effect.gen(function* () {
     const client = yield* HttpClient.HttpClient
     const cwd = process.cwd()
+    // biome-ignore lint/suspicious/noImplicitAnyLet: <explanation>
     let config
     try {
       const jsonStr = yield* Effect.tryPromise(() => FS.readFile("components.json", "utf8"))
