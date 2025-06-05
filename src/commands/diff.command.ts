@@ -72,10 +72,12 @@ export const diffCommand = Command.make("diff", {}, () =>
       const localContent = yield* Effect.tryPromise(() => FS.readFile(file, "utf8"))
       const remoteContent = yield* HttpClientRequest.get(remoteUrl).pipe(
         client.execute,
+        // @ts-ignore
         Effect.flatMap(HttpClientResponse.text),
         Effect.catchAll(() => Effect.succeed("")),
       )
       if (localContent !== remoteContent) {
+        // @ts-ignore
         diffs.push({ file: relative, diff: simpleDiff(localContent, remoteContent) })
       }
     }
