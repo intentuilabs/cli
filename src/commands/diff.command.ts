@@ -1,9 +1,95 @@
 import { Command } from "@effect/cli"
 import { Console, Effect } from "effect"
-import { componentNames, componentType } from "./add.command"
+import {
+  HttpClient,
+  HttpClientRequest,
+  HttpClientResponse,
+} from "@effect/platform"
+import * as FS from "node:fs/promises"
+import * as Path from "node:path"
 
-export const diffCommand = Command.make("diff", { componentNames, componentType }, (config) =>
+const REMOTE_BASE =
+  "https://raw.githubusercontent.com/irsyadadl/intentui/2.x/components/ui"
+
+function simpleDiff(local: string, remote: string): string {
+  const l = local.split(/\r?\n/)
+  const r = remote.split(/\r?\n/)
+  const max = Math.max(l.length, r.length)
+  let out = ""
+  for (let i = 0; i < max; i++) {
+    const a = l[i]
+    const b = r[i]
+    if (a !== b) {
+      if (a !== undefined) out += `- ${a}\n`
+      if (b !== undefined) out += `+ ${b}\n`
+    }
+  }
+  return out
+}
+
+async function listFiles(dir: string): Promise<string[]> {
+  const entries = await FS.readdir(dir, { withFileTypes: true })
+  const files: string[] = []
+  for (const entry of entries) {
+    const res = Path.join(dir, entry.name)
+    if (entry.isDirectory()) {
+      files.push(...(await listFiles(res)))
+    } else {
+      files.push(res)
+    }
+  }
+  return files
+}
+
+export const diffCommand = Command.make("diff", {}, () =>
   Effect.gen(function* () {
-    yield* Console.log("Coming soon...")
+    const client = yield* HttpClient.HttpClient
+    const cwd = process.cwd()
+    let config
+    try {
+      const jsonStr = yield* Effect.tryPromise(() => FS.readFile("components.json", "utf8"))
+      config = JSON.parse(jsonStr)
+    } catch {
+      yield* Console.error("components.json not found or invalid")
+      return
+    }
+
+    const alias: string = config.aliases?.ui ?? "components/ui"
+    const uiPath = Path.isAbsolute(alias.replace(/^@\//, ""))
+      ? alias.replace(/^@\//, "")
+      : Path.join(cwd, alias.replace(/^@\//, ""))
+
+    let files: string[] = []
+    try {
+      files = await listFiles(uiPath)
+    } catch {
+      yield* Console.error(`Unable to read local components at ${uiPath}`)
+      return
+    }
+
+    const diffs: Array<{ file: string; diff: string }> = []
+    for (const file of files) {
+      const relative = Path.relative(uiPath, file).replace(/\\/g, "/")
+      const remoteUrl = `${REMOTE_BASE}/${relative}`
+      const localContent = yield* Effect.tryPromise(() => FS.readFile(file, "utf8"))
+      const remoteContent = yield* HttpClientRequest.get(remoteUrl).pipe(
+        client.execute,
+        Effect.flatMap(HttpClientResponse.text),
+        Effect.catchAll(() => Effect.succeed("")),
+      )
+      if (localContent !== remoteContent) {
+        diffs.push({ file: relative, diff: simpleDiff(localContent, remoteContent) })
+      }
+    }
+
+    if (diffs.length === 0) {
+      yield* Console.log("All components are up to date.")
+    } else {
+      for (const d of diffs) {
+        yield* Console.log(`--- ${d.file} ---`)
+        yield* Console.log(d.diff)
+      }
+      yield* Console.log("Some components differ from the registry. Run 'intentui add <component>' to sync.")
+    }
   }),
 ).pipe(Command.withDescription("Compares your local components with the registry versions."))
