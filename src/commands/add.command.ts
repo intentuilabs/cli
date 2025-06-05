@@ -21,6 +21,8 @@ export const allComponents = Options.boolean("all").pipe(
   Options.withDefault(false),
 )
 
+export const overwrite = Options.boolean("overwrite").pipe(Options.withDefault(false))
+
 export const componentType = Options.choice("type", ["ui", "block", "style"]).pipe(
   Options.withAlias("t"),
   Options.withDefault("ui"),
@@ -28,8 +30,8 @@ export const componentType = Options.choice("type", ["ui", "block", "style"]).pi
 
 export const addCommand = Command.make(
   "add",
-  { componentNames, isBlock, isStyle, componentType, allComponents },
-  ({ componentNames, isBlock, isStyle, componentType, allComponents }) =>
+  { componentNames, isBlock, isStyle, componentType, allComponents, overwrite },
+  ({ componentNames, isBlock, isStyle, componentType, allComponents, overwrite }) =>
     Effect.gen(function* () {
       const type = isBlock ? "block" : isStyle ? "style" : componentType
 
@@ -53,20 +55,18 @@ export const addCommand = Command.make(
           Effect.flatMap(HttpClientResponse.schemaBodyJson(Schema.Array(Component))),
         )
 
-        return yield* RawCommand.make(
-          "shadcnClone",
-          "add",
-          ...response.map((c) => `https://intentui.com/r/${c.name}.json`),
-        ).pipe(
-          RawCommand.stdin("inherit"),
-          RawCommand.stdout("inherit"),
-          RawCommand.stderr("inherit"),
-          RawCommand.exitCode,
-        )
+        const components = response.map((c) => `${REGISTRY_URL}/r/${c.name}.json`)
+        componentPaths.push(...components)
+      }
+
+      const args = ["add", ...componentPaths]
+
+      if (overwrite) {
+        args.push("--overwrite")
       }
 
       return yield* pipe(
-        RawCommand.make("shadcnClone", "add", ...componentPaths).pipe(
+        RawCommand.make("shadcnClone", ...args).pipe(
           RawCommand.stdin("inherit"),
           RawCommand.stdout("inherit"),
           RawCommand.stderr("inherit"),
