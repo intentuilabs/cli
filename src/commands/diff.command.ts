@@ -45,6 +45,7 @@ export const diffCommand = Command.make("diff", {}, () =>
   Effect.gen(function* () {
     const client = yield* HttpClient.HttpClient
     const cwd = process.cwd()
+    // biome-ignore lint/suspicious/noImplicitAnyLet: <explanation>
     let config
     try {
       const jsonStr = yield* Effect.tryPromise(() => FS.readFile("components.json", "utf8"))
@@ -59,13 +60,14 @@ export const diffCommand = Command.make("diff", {}, () =>
       ? alias.replace(/^@\//, "")
       : Path.join(cwd, alias.replace(/^@\//, ""))
 
-    let files: string[] = []
-    try {
-      files = await listFiles(uiPath)
-    } catch {
+    const filesResult = yield* Effect.tryPromise(() => listFiles(uiPath)).pipe(
+      Effect.catchAll(() => Effect.succeed([] as string[])),
+    )
+    if (filesResult.length === 0) {
       yield* Console.error(`Unable to read local components at ${uiPath}`)
       return
     }
+    const files = filesResult
 
     const diffs: Array<{ file: string; diff: string }> = []
     for (const file of files) {
