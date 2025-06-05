@@ -1,7 +1,7 @@
 import { Command } from "@effect/cli"
-import { Console, Effect } from "effect"
-import { Command as RawCommand, FileSystem } from "@effect/platform"
+import { FileSystem, Command as RawCommand } from "@effect/platform"
 import { NodeFileSystem } from "@effect/platform-node"
+import { Console, Effect } from "effect"
 
 import { REGISTRY_URL } from "~/consts"
 
@@ -61,7 +61,6 @@ export const initCommand = Command.make("init", {}, () =>
     const patched = lines.join("\n")
 
     yield* fileSytem.writeFileString(cssPath, patched)
-
   }).pipe(
     Effect.scoped,
     Effect.provide(NodeCommandExecutor.layer),

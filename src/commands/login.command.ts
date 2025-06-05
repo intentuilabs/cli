@@ -44,11 +44,7 @@ const generateNanoid = Effect.sync(() => nanoid())
 
 const openUrl = (urlToOpen: string) => {
   const openCommand =
-    process.platform === "darwin"
-      ? "open"
-      : process.platform === "win32"
-        ? "start"
-        : "xdg-open"
+    process.platform === "darwin" ? "open" : process.platform === "win32" ? "start" : "xdg-open"
 
   return Effect.try({
     try: () =>

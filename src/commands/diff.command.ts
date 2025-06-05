@@ -1,15 +1,11 @@
-import { Command } from "@effect/cli"
-import { Console, Effect } from "effect"
-import {
-  HttpClient,
-  HttpClientRequest,
-  HttpClientResponse,
-} from "@effect/platform"
 import * as FS from "node:fs/promises"
 import * as Path from "node:path"
+import { Command } from "@effect/cli"
+import { HttpClient, HttpClientRequest, HttpClientResponse } from "@effect/platform"
+import { Console, Effect } from "effect"
+import { app } from "~/lib/app"
 
-const REMOTE_BASE =
-  "https://raw.githubusercontent.com/irsyadadl/intentui/2.x/components/ui"
+const REMOTE_BASE = app.repo.ui
 
 function simpleDiff(local: string, remote: string): string {
   const l = local.split(/\r?\n/)
@@ -91,7 +87,9 @@ export const diffCommand = Command.make("diff", {}, () =>
         yield* Console.log(`--- ${d.file} ---`)
         yield* Console.log(d.diff)
       }
-      yield* Console.log("Some components differ from the registry. Run 'intentui add <component>' to sync.")
+      yield* Console.log(
+        "Some components differ from the registry. Run 'intentui add <component>' to sync.",
+      )
     }
   }),
 ).pipe(Command.withDescription("Compares your local components with the registry versions."))
