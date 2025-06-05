@@ -4,6 +4,12 @@ import { Command } from "@effect/cli"
 import { HttpClient, HttpClientRequest, HttpClientResponse } from "@effect/platform"
 import { Console, Effect } from "effect"
 import { app } from "~/lib/app"
+import {
+  isLaravel,
+  isNextWithSrc,
+  isNextWithoutSrc,
+  isRemix,
+} from "~/lib/check-current-user-project"
 
 const REMOTE_BASE = app.repo.ui
 
@@ -51,7 +57,21 @@ export const diffCommand = Command.make("diff", {}, () =>
       return
     }
 
-    const alias: string = config.aliases?.ui ?? "components/ui"
+    let alias: string | undefined = config.aliases?.ui
+
+    if (!alias) {
+      const nextWithSrc = yield* Effect.tryPromise(() => isNextWithSrc(cwd))
+      const nextWithoutSrc = yield* Effect.tryPromise(() => isNextWithoutSrc(cwd))
+      const remix = yield* Effect.tryPromise(() => isRemix(cwd))
+      const laravel = yield* Effect.tryPromise(() => isLaravel(cwd))
+
+      if (nextWithSrc) alias = "src/components/ui"
+      else if (nextWithoutSrc) alias = "components/ui"
+      else if (remix) alias = "app/components/ui"
+      else if (laravel) alias = "resources/components/ui"
+      else alias = "components/ui"
+    }
+
     const uiPath = Path.isAbsolute(alias.replace(/^@\//, ""))
       ? alias.replace(/^@\//, "")
       : Path.join(cwd, alias.replace(/^@\//, ""))
@@ -72,12 +92,10 @@ export const diffCommand = Command.make("diff", {}, () =>
       const localContent = yield* Effect.tryPromise(() => FS.readFile(file, "utf8"))
       const remoteContent = yield* HttpClientRequest.get(remoteUrl).pipe(
         client.execute,
-        // @ts-ignore
         Effect.flatMap(HttpClientResponse.text),
         Effect.catchAll(() => Effect.succeed("")),
       )
       if (localContent !== remoteContent) {
-        // @ts-ignore
         diffs.push({ file: relative, diff: simpleDiff(localContent, remoteContent) })
       }
     }
