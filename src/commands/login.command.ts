@@ -42,16 +42,27 @@ const nanoid = customAlphabet("123456789QAZWSXEDCRFVTGBYHNUJMIKOLP", 8)
 
 const generateNanoid = Effect.sync(() => nanoid())
 
-const openUrl = (urlToOpen: string) =>
-  Effect.try({
-    try: () => ChildProcess.spawn("open", [urlToOpen]),
+const openUrl = (urlToOpen: string) => {
+  const openCommand =
+    process.platform === "darwin"
+      ? "open"
+      : process.platform === "win32"
+        ? "start"
+        : "xdg-open"
+
+  return Effect.try({
+    try: () =>
+      ChildProcess.spawn(openCommand, [urlToOpen], {
+        shell: process.platform === "win32",
+      }),
     catch: (cause) =>
       new ProcessError({
         message: `Failed to open URL: ${urlToOpen}`,
-        command: "open",
+        command: openCommand,
         cause,
       }),
   })
+}
 
 const getUserConfigPath = Effect.sync(() => Path.join(OS.homedir(), FILENAME))
 
