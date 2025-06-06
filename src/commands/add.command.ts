@@ -37,8 +37,15 @@ export const addCommand = Command.make(
 
       const componentPaths = yield* pipe(
         Effect.forEach(componentNames, (name) =>
-          Effect.succeed(`${REGISTRY_URL}/r/${type}-${name}.json`),
+          Effect.succeed(
+            name.startsWith("http")
+              ? name
+              : name.startsWith("-")
+                ? null
+                : `${REGISTRY_URL}/r/${type}-${name}.json`
+          ),
         ),
+        Effect.map((list) => list.filter((url): url is string => url !== null))
       )
 
       if (!allComponents && componentPaths.length === 0) {
@@ -59,11 +66,13 @@ export const addCommand = Command.make(
         componentPaths.push(...components)
       }
 
-      const args = ["add", ...componentPaths]
+      const args = ["add"]
 
       if (overwrite) {
         args.push("--overwrite")
       }
+
+      args.push(...componentPaths)
 
       return yield* pipe(
         RawCommand.make("shadcnClone", ...args).pipe(
