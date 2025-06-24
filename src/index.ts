@@ -1,4 +1,4 @@
-#! /usr/bin/env node
+#! /usr/bin/env bun
 
 import { Command } from "@effect/cli"
 import { NodeContext, NodeRuntime } from "@effect/platform-node"
@@ -12,6 +12,7 @@ import { addCommand } from "~/commands/add.command"
 import { diffCommand } from "~/commands/diff.command"
 import { initCommand } from "~/commands/init.command"
 import { loginCommand } from "~/commands/login.command"
+import { addBlockCommand } from "./commands/block.command"
 import { themeCommand } from "./commands/theme.command"
 
 const generateFigletText = (text: string, options: figlet.Options): Effect.Effect<string, Error> =>
@@ -64,7 +65,14 @@ const rootCommand = Command.make("root", {}, () =>
 )
 
 const command = rootCommand.pipe(
-  Command.withSubcommands([initCommand, addCommand, diffCommand, loginCommand, themeCommand]),
+  Command.withSubcommands([
+    initCommand,
+    addCommand,
+    diffCommand,
+    loginCommand,
+    themeCommand,
+    addBlockCommand,
+  ]),
 )
 
 const cli = Command.run(command, {

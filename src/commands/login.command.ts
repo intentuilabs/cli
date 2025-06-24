@@ -9,7 +9,7 @@ import { Command } from "@effect/cli"
 import { Config, Console, Data, Effect } from "effect"
 import { customAlphabet } from "nanoid"
 
-const FILENAME = ".intentui"
+export const FILENAME = ".intentui"
 const DOMAIN_CONFIG = Config.succeed("https://blocks.intentui.com")
 
 class UserCancellationError extends Data.TaggedError("UserCancellationError")<{
@@ -76,6 +76,31 @@ const saveApiKey = (apiKey: string) =>
         }),
     })
   })
+
+export const getApiKey = Effect.gen(function* () {
+  const path = yield* getUserConfigPath
+  const content = yield* Effect.tryPromise({
+    try: () => FS.readFile(path, "utf8"),
+    catch: (cause) =>
+      new FileSystemError({
+        message: "Failed to read API key",
+        path,
+        cause,
+      }),
+  })
+
+  const config = yield* Effect.try({
+    try: () => JSON.parse(content),
+    catch: (cause) =>
+      new FileSystemError({
+        message: "Invalid config file format",
+        path,
+        cause,
+      }),
+  })
+
+  return yield* Effect.succeed(config.key as string)
+})
 
 export const loginCommand = Command.make("login", {}, () =>
   Effect.gen(function* () {
