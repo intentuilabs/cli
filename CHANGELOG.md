@@ -1,5 +1,9 @@
 # Changelog
 
+## <small>3.1.2 (2025-06-26)</small>
+
+* wip ([dff8da4](https://github.com/intentuilabs/cli/commit/dff8da4))
+
 ## <small>3.1.1 (2025-06-26)</small>
 
 * fix: change the version ([921c864](https://github.com/intentuilabs/cli/commit/921c864))
