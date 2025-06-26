@@ -77,7 +77,7 @@ const command = rootCommand.pipe(
 
 const cli = Command.run(command, {
   name: "Intent UI CLI",
-  version: "v2.9.0",
+  version: "v3.1.1",
 })
 
 cli(process.argv).pipe(
