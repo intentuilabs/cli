@@ -1,5 +1,9 @@
 # Changelog
 
+## <small>3.1.1 (2025-06-26)</small>
+
+* fix: change the version ([921c864](https://github.com/intentuilabs/cli/commit/921c864))
+
 ## 3.2.0 (2025-06-26)
 
 * feat: change the version ([704b510](https://github.com/intentuilabs/cli/commit/704b510))
