@@ -1,5 +1,9 @@
 # Changelog
 
+## <small>3.1.5 (2025-06-26)</small>
+
+* fix: actions ([05fa300](https://github.com/intentuilabs/cli/commit/05fa300))
+
 ## <small>3.1.4 (2025-06-26)</small>
 
 ## <small>3.1.3 (2025-06-26)</small>
