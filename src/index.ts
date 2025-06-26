@@ -14,6 +14,12 @@ import { initCommand } from "~/commands/init.command"
 import { loginCommand } from "~/commands/login.command"
 import { addBlockCommand } from "./commands/block.command"
 import { themeCommand } from "./commands/theme.command"
+import { fileURLToPath } from "node:url"
+import { dirname, resolve } from "node:path"
+import { readFileSync } from "node:fs"
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 const generateFigletText = (text: string, options: figlet.Options): Effect.Effect<string, Error> =>
   Effect.async<string, Error>((resume) => {
@@ -75,9 +81,13 @@ const command = rootCommand.pipe(
   ]),
 )
 
+const pkg = JSON.parse(
+  readFileSync(resolve(__dirname, "../package.json"), "utf-8") // adjust path sesuai struktur build lo
+)
+
 const cli = Command.run(command, {
   name: "Intent UI CLI",
-  version: "v3.1.1",
+  version: pkg.version,
 })
 
 cli(process.argv).pipe(
