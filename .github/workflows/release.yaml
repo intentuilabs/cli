@@ -4,6 +4,7 @@ on:
     types: [published]
 jobs:
   build-and-publish:
+    if: github.event.release.target_commitish == 'main'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
