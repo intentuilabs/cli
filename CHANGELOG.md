@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.2.0 (2025-06-26)
+
+* feat: change the version ([704b510](https://github.com/intentuilabs/cli/commit/704b510))
+
 ## 3.1.0 (2025-06-25)
 
 * add checking project ([f382349](https://github.com/intentuilabs/cli/commit/f382349))
