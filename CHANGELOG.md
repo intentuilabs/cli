@@ -1,5 +1,9 @@
 # Changelog
 
+## <small>3.1.3 (2025-06-26)</small>
+
+* fix: action ([8a4205a](https://github.com/intentuilabs/cli/commit/8a4205a))
+
 ## <small>3.1.2 (2025-06-26)</small>
 
 * wip ([dff8da4](https://github.com/intentuilabs/cli/commit/dff8da4))
