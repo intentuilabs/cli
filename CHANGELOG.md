@@ -1,5 +1,9 @@
 # Changelog
 
+## <small>3.1.7 (2025-06-29)</small>
+
+* add lib and hook ([c9da625](https://github.com/intentuilabs/cli/commit/c9da625))
+
 ## <small>3.1.6 (2025-06-26)</small>
 
 * fix: again action ([3325ad5](https://github.com/intentuilabs/cli/commit/3325ad5))
