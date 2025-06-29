@@ -7,6 +7,9 @@ import { Console, Effect } from "effect"
 import chalk from "chalk"
 import figlet from "figlet"
 
+import { readFileSync } from "node:fs"
+import { dirname, resolve } from "node:path"
+import { fileURLToPath } from "node:url"
 import { FetchHttpClient } from "@effect/platform"
 import { addCommand } from "~/commands/add.command"
 import { diffCommand } from "~/commands/diff.command"
@@ -14,9 +17,6 @@ import { initCommand } from "~/commands/init.command"
 import { loginCommand } from "~/commands/login.command"
 import { addBlockCommand } from "./commands/block.command"
 import { themeCommand } from "./commands/theme.command"
-import { fileURLToPath } from "node:url"
-import { dirname, resolve } from "node:path"
-import { readFileSync } from "node:fs"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -82,7 +82,7 @@ const command = rootCommand.pipe(
 )
 
 const pkg = JSON.parse(
-  readFileSync(resolve(__dirname, "../package.json"), "utf-8") // adjust path sesuai struktur build lo
+  readFileSync(resolve(__dirname, "../package.json"), "utf-8"), // adjust path sesuai struktur build lo
 )
 
 const cli = Command.run(command, {

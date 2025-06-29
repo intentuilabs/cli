@@ -22,7 +22,7 @@ export const overwrite = Options.boolean("overwrite").pipe(
   Options.withAlias("o"),
   Options.withDefault(false),
 )
-export const componentType = Options.choice("type", ["ui", "block", "style"]).pipe(
+export const componentType = Options.choice("type", ["ui", "block", "style", "lib", "hook"]).pipe(
   Options.withAlias("t"),
   Options.withDefault("ui"),
 )
@@ -33,7 +33,6 @@ export const addCommand = Command.make(
   ({ componentNames, isBlock, isStyle, componentType, allComponents, overwrite }) =>
     Effect.gen(function* () {
       const type = isBlock ? "block" : isStyle ? "style" : componentType
-
       if (!allComponents && componentNames.length === 0) {
         yield* Console.log(chalk.red("No components selected"))
         yield* Console.log(chalk.red("Please select a component or use --all"))
