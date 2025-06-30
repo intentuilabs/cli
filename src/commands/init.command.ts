@@ -6,7 +6,7 @@ import { Console, Effect } from "effect"
 import { REGISTRY_URL } from "~/consts"
 
 import { NodeCommandExecutor } from "@effect/platform-node"
-const shadcnInit = RawCommand.make("shadcnClone", "init", `${REGISTRY_URL}/r/default.json`).pipe(
+const shadcnInit = RawCommand.make("shadcnClone", "init", `${REGISTRY_URL}/r/style/default.json`).pipe(
   RawCommand.stdin("inherit"),
   RawCommand.stdout("inherit"),
   RawCommand.stderr("inherit"),
