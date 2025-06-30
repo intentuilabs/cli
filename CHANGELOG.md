@@ -1,5 +1,10 @@
 # Changelog
 
+## <small>3.1.8 (2025-06-30)</small>
+
+* fix: init ([f1b9c69](https://github.com/intentuilabs/cli/commit/f1b9c69))
+* Update init.command.ts ([c93ed4e](https://github.com/intentuilabs/cli/commit/c93ed4e))
+
 ## <small>3.1.7 (2025-06-29)</small>
 
 * add lib and hook ([c9da625](https://github.com/intentuilabs/cli/commit/c9da625))
