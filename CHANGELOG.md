@@ -1,5 +1,9 @@
 # Changelog
 
+## <small>3.1.9 (2025-07-01)</small>
+
+* fix: path ([f327a40](https://github.com/intentuilabs/cli/commit/f327a40))
+
 ## <small>3.1.8 (2025-06-30)</small>
 
 * fix: init ([f1b9c69](https://github.com/intentuilabs/cli/commit/f1b9c69))

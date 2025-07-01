@@ -1,7 +1,7 @@
 {
   "name": "@intentui/cli",
   "type": "module",
-  "version": "3.1.8",
+  "version": "3.1.9",
   "description": "The command line interface for Intent UI.",
   "main": "dist/index.js",
   "bin": {
@@ -9,7 +9,12 @@
     "intentui": "dist/index.js",
     "shadcnClone": "dist/shadcn/index.js"
   },
-  "files": ["dist", "LICENSE", "README.md", "package.json"],
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md",
+    "package.json"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/intentuilabs/cli.git"
@@ -29,7 +34,12 @@
     "release": "export GITHUB_TOKEN=$(cat .github_token) && release-it",
     "typecheck": "tsc --noEmit"
   },
-  "keywords": ["cli", "intentui cli", "Intent UI", "design-system"],
+  "keywords": [
+    "cli",
+    "intentui cli",
+    "Intent UI",
+    "design-system"
+  ],
   "author": "Irsyad A. Panjaitan",
   "license": "MIT",
   "devDependencies": {
