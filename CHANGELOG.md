@@ -1,5 +1,9 @@
 # Changelog
 
+## <small>3.1.10 (2025-07-01)</small>
+
+* fix: executor ([f8cb30e](https://github.com/intentuilabs/cli/commit/f8cb30e))
+
 ## <small>3.1.9 (2025-07-01)</small>
 
 * fix: path ([f327a40](https://github.com/intentuilabs/cli/commit/f327a40))
