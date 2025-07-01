@@ -1,4 +1,7 @@
 import { Args, Command, Options } from "@effect/cli"
+import * as FileSystem from "@effect/platform/FileSystem"
+
+import * as Path from "node:path"
 import {
   HttpClient,
   HttpClientRequest,
@@ -8,6 +11,14 @@ import {
 import chalk from "chalk"
 import { Console, Effect, Schema, pipe } from "effect"
 import { REGISTRY_URL } from "~/consts"
+import { applyUserAliases } from "~/lib/apply-user-aliases"
+import {
+  isLaravel,
+  isNextWithSrc,
+  isNextWithoutSrc,
+  isRemix,
+} from "~/lib/check-current-user-project"
+import { walkFiles } from "~/lib/walk-files"
 import { Component } from "~/schema/component"
 
 export const componentNames = Args.text({ name: "componentNames" }).pipe(Args.repeated)
@@ -78,7 +89,7 @@ export const addCommand = Command.make(
       }
       args.push(...componentPaths)
 
-      return yield* pipe(
+      const exitCode = yield* pipe(
         RawCommand.make("shadcnClone", ...args).pipe(
           RawCommand.stdin("inherit"),
           RawCommand.stdout("inherit"),
@@ -86,5 +97,53 @@ export const addCommand = Command.make(
           RawCommand.exitCode,
         ),
       )
+
+      if (exitCode === 0) {
+        const fileSystem = yield* FileSystem.FileSystem
+
+        const userConfigPath = Path.resolve(process.cwd(), "components.json")
+        const userConfigRaw = yield* fileSystem.readFileString(userConfigPath)
+        const userConfig = JSON.parse(userConfigRaw)
+
+        const cwd = process.cwd()
+
+        const hasSrc = yield* Effect.promise(() => isNextWithSrc(cwd))
+        const noSrc = yield* Effect.promise(() => isNextWithoutSrc(cwd))
+        const isRemixApp = yield* Effect.promise(() => isRemix(cwd))
+        const isLaravelApp = yield* Effect.promise(() => isLaravel(cwd))
+
+        function resolveAliasPath(aliasPath: string): string {
+          const base =
+            isLaravelApp || noSrc ? cwd : hasSrc || isRemixApp ? Path.join(cwd, "src") : cwd
+
+          return Path.resolve(aliasPath.replace(/^@\//, `${base}/`))
+        }
+
+        const foldersToPatch = Object.values(userConfig.aliases as Record<string, string>)
+          .filter((dir) => typeof dir === "string" && dir.startsWith("@/"))
+          .map((aliasPath) => resolveAliasPath(aliasPath))
+
+        for (const folder of foldersToPatch) {
+          const exists = yield* fileSystem.exists(folder)
+          if (!exists) continue
+
+          const allFiles = yield* walkFiles(fileSystem, folder)
+
+          for (const file of allFiles) {
+            const fullPath = Path.join(folder, file)
+            if (!fullPath.endsWith(".tsx")) continue
+
+            const raw = yield* fileSystem.readFileString(fullPath)
+            const updated = applyUserAliases(raw, userConfig.aliases)
+
+            if (updated !== raw) {
+              yield* fileSystem.writeFile(fullPath, Buffer.from(updated))
+            }
+          }
+        }
+
+      }
+
+      return exitCode
     }),
 ).pipe(Command.withDescription("Adds UI components or blocks to your project."))
