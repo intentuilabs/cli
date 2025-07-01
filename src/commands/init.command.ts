@@ -6,11 +6,13 @@ import { Console, Effect } from "effect"
 import { REGISTRY_URL } from "~/consts"
 
 import { NodeCommandExecutor } from "@effect/platform-node"
-const shadcnInit = RawCommand.make("shadcnClone", "init", `${REGISTRY_URL}/r/style/default`).pipe(
-  RawCommand.stdin("inherit"),
-  RawCommand.stdout("inherit"),
-  RawCommand.stderr("inherit"),
-)
+import { resolveShadcnClone } from "~/lib/resolve-shadnc-clone"
+const shadcnInit = RawCommand.make(
+  "node",
+  resolveShadcnClone(),
+  "init",
+  `${REGISTRY_URL}/r/style/default`,
+).pipe(RawCommand.stdin("inherit"), RawCommand.stdout("inherit"), RawCommand.stderr("inherit"))
 
 export const initCommand = Command.make("init", {}, () =>
   Effect.gen(function* () {

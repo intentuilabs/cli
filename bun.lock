@@ -12,7 +12,7 @@
         "figlet": "^1.8.1",
         "nanoid": "^5.1.5",
         "rc9": "^2.1.2",
-        "shadcn": "^2.6.0",
+        "shadcn": "^2.7.0",
       },
       "devDependencies": {
         "@biomejs/biome": "^1.9.4",
@@ -1080,7 +1080,7 @@
 
     "setprototypeof": ["setprototypeof@1.2.0", "", {}, "sha512-E5LDX7Wrp85Kil5bhZv46j8jOeboKq5JMmYM3gVGdGH8xFpPWXUMsNrlODCrkoxMEeNi/XZIwuRvY4XNwYMJpw=="],
 
-    "shadcn": ["shadcn@2.6.0", "", { "dependencies": { "@antfu/ni": "^23.2.0", "@babel/core": "^7.22.1", "@babel/parser": "^7.22.6", "@babel/plugin-transform-typescript": "^7.22.5", "@modelcontextprotocol/sdk": "^1.10.2", "commander": "^10.0.0", "cosmiconfig": "^8.1.3", "deepmerge": "^4.3.1", "diff": "^5.1.0", "execa": "^7.0.0", "fast-glob": "^3.3.2", "fs-extra": "^11.1.0", "https-proxy-agent": "^6.2.0", "kleur": "^4.1.5", "msw": "^2.7.1", "node-fetch": "^3.3.0", "ora": "^6.1.2", "postcss": "^8.4.24", "prompts": "^2.4.2", "recast": "^0.23.2", "stringify-object": "^5.0.0", "ts-morph": "^18.0.0", "tsconfig-paths": "^4.2.0", "zod": "^3.20.2", "zod-to-json-schema": "^3.24.5" }, "bin": { "shadcn": "dist/index.js" } }, "sha512-Z/yN3TnVPvdnr623Ln4RIOs20++6HFEAEMQObDOsU3+qkoQ0Y/gAP+S8/paAnUAXj849hDNtu4SJEvhW9XqJUA=="],
+    "shadcn": ["shadcn@2.7.0", "", { "dependencies": { "@antfu/ni": "^23.2.0", "@babel/core": "^7.22.1", "@babel/parser": "^7.22.6", "@babel/plugin-transform-typescript": "^7.22.5", "@modelcontextprotocol/sdk": "^1.10.2", "commander": "^10.0.0", "cosmiconfig": "^8.1.3", "deepmerge": "^4.3.1", "diff": "^5.1.0", "execa": "^7.0.0", "fast-glob": "^3.3.2", "fs-extra": "^11.1.0", "https-proxy-agent": "^6.2.0", "kleur": "^4.1.5", "msw": "^2.7.1", "node-fetch": "^3.3.0", "ora": "^6.1.2", "postcss": "^8.4.24", "prompts": "^2.4.2", "recast": "^0.23.2", "stringify-object": "^5.0.0", "ts-morph": "^18.0.0", "tsconfig-paths": "^4.2.0", "zod": "^3.20.2", "zod-to-json-schema": "^3.24.5" }, "bin": { "shadcn": "dist/index.js" } }, "sha512-NzkUf58HI3AxcrdnmAgdN3oT0f2J5CyFKMi2exdVLtoRW+A5GxADxWqhWKRvBmdWoiPDuqYeb3ScZxhlS9aflA=="],
 
     "shebang-command": ["shebang-command@2.0.0", "", { "dependencies": { "shebang-regex": "^3.0.0" } }, "sha512-kHxr2zZpYtdmrN1qDjrrX/Z1rR1kG8Dx+gkpK1G4eXmvXswmcE1hTWBWYUzlraYw1/yZp6YuDY77YtvbN0dmDA=="],
 

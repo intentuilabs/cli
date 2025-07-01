@@ -1,12 +1,9 @@
+import * as Path from "node:path"
 // biome-ignore lint/style/useImportType: <explanation>
 import * as FS from "@effect/platform/FileSystem"
-import * as Path from "node:path"
 import { Effect } from "effect"
 
-export function walkFiles(
-  fs: FS.FileSystem,
-  dir: string,
-): Effect.Effect<string[], unknown> {
+export function walkFiles(fs: FS.FileSystem, dir: string): Effect.Effect<string[], unknown> {
   return Effect.gen(function* () {
     const entries = yield* fs.readDirectory(dir)
     const out: string[] = []

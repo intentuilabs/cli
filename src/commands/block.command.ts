@@ -2,6 +2,7 @@ import { Args, Command, Options } from "@effect/cli"
 import { Command as RawCommand } from "@effect/platform"
 import { Console, Effect, pipe } from "effect"
 import { BLOCKS_REGISTRY_URL } from "~/consts"
+import { resolveShadcnClone } from "~/lib/resolve-shadnc-clone"
 import { getApiKey } from "./login.command"
 
 export const blockName = Args.text({ name: "blockName" })
@@ -42,7 +43,7 @@ export const addBlockCommand = Command.make(
       args.push(componentPath)
 
       return yield* pipe(
-        RawCommand.make("shadcnClone", ...args).pipe(
+        RawCommand.make("node", resolveShadcnClone(), ...args).pipe(
           RawCommand.stdin("inherit"),
           RawCommand.stdout("inherit"),
           RawCommand.stderr("inherit"),

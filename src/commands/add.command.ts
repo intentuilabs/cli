@@ -18,6 +18,7 @@ import {
   isNextWithoutSrc,
   isRemix,
 } from "~/lib/check-current-user-project"
+import { resolveShadcnClone } from "~/lib/resolve-shadnc-clone"
 import { walkFiles } from "~/lib/walk-files"
 import { Component } from "~/schema/component"
 
@@ -61,7 +62,7 @@ export const addCommand = Command.make(
         if (overwrite) args.push("--overwrite")
         args.push(...components)
         return yield* pipe(
-          RawCommand.make("shadcnClone", ...args).pipe(
+          RawCommand.make("node", resolveShadcnClone(), ...args).pipe(
             RawCommand.stdin("inherit"),
             RawCommand.stdout("inherit"),
             RawCommand.stderr("inherit"),
@@ -90,7 +91,7 @@ export const addCommand = Command.make(
       args.push(...componentPaths)
 
       const exitCode = yield* pipe(
-        RawCommand.make("shadcnClone", ...args).pipe(
+        RawCommand.make("node", resolveShadcnClone(), ...args).pipe(
           RawCommand.stdin("inherit"),
           RawCommand.stdout("inherit"),
           RawCommand.stderr("inherit"),
@@ -141,7 +142,6 @@ export const addCommand = Command.make(
             }
           }
         }
-
       }
 
       return exitCode
