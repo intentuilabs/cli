@@ -1,5 +1,8 @@
-import * as Path from "node:path"
+import * as path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 export function resolveShadcnClone() {
-  return Path.resolve(__dirname, "../../dist/shadcn/index.js")
+  return path.resolve(__dirname, "shadcn/index.js")
 }
